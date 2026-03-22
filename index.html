@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>SEIL 전시회 상담록</title>
+<title>SEIILTECHNO 상담록</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#1a3f6f;--navy-lt:#e8eef6;--green:#1a5c3a;--green-lt:#e4f0e8;--amber:#7a4800;--amber-lt:#fdf0dc;--red:#7a1a1a;--red-lt:#fce8e8;--teal:#0a5a5a;--teal-lt:#e0f0f0;--ink:#0d0d0d;--ink2:#3a3a3a;--ink3:#6b6b6b;--ink4:#a0a0a0;--paper:#f8f6f1;--paper2:#eeece7;--white:#ffffff;--r:12px;}
@@ -17,8 +17,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
 .app-sub{font-size:10px;color:rgba(255,255,255,0.6);font-family:'IBM Plex Mono',monospace;margin-top:2px;}
 .header-right{display:flex;align-items:center;gap:8px;}
 .rec-count{background:rgba(255,255,255,0.15);color:#fff;font-size:12px;font-weight:500;padding:4px 10px;border-radius:20px;font-family:'IBM Plex Mono',monospace;}
-.sync-badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:500;}
-.sync-ok{background:#d4edda;color:#1a5c3a;}.sync-err{background:#fce8e8;color:#7a1a1a;}.sync-off{display:none!important;}
+.sync-badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:500;display:none;}
+.sync-badge.show{display:inline;}
+.sync-ok{background:#d4edda;color:#1a5c3a;}
+.sync-err{background:#fce8e8;color:#7a1a1a;}
 .tab-nav{display:flex;background:var(--white);border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;}
 .tab-btn{flex:1;padding:10px 0;font-size:12px;font-weight:500;color:var(--ink4);border:none;background:none;border-bottom:2px solid transparent;cursor:pointer;transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;}
 .tab-btn.active{color:var(--navy);border-bottom-color:var(--navy);}
@@ -67,27 +69,23 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
 .sel-act{background:var(--red-lt);color:var(--red);border-color:var(--red);font-weight:500;}
 .sel-cons{background:var(--teal-lt);color:var(--teal);border-color:var(--teal);font-weight:500;}
 .submit-btn{width:100%;padding:15px;background:var(--green);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;margin-top:14px;font-family:'Noto Sans KR',sans-serif;letter-spacing:0.02em;}
-.submit-btn:active{opacity:0.8;}
 .record-card{background:var(--white);border-radius:var(--r);overflow:hidden;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
 .record-hdr{padding:10px 14px;display:flex;align-items:center;gap:10px;}
 .record-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .record-company{font-size:14px;font-weight:700;flex:1;}
 .lvbadge{padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
-.lvaplus{background:#DCEAF8;color:var(--navy);}.lva{background:#D4EDDA;color:var(--green);}.lvb{background:#FFF3CD;color:var(--amber);}.lvc{background:#E8E8E8;color:#5a5a5a;}
+.lvaplus{background:#DCEAF8;color:var(--navy);}
+.lva{background:#D4EDDA;color:var(--green);}
+.lvb{background:#FFF3CD;color:var(--amber);}
+.lvc{background:#E8E8E8;color:#5a5a5a;}
 .sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.dot-ok{background:var(--green);}.dot-pending{background:var(--amber);}
+.dot-ok{background:var(--green);}
+.dot-pending{background:var(--amber);}
 .record-body{padding:10px 14px;}
 .rrow{display:flex;gap:8px;font-size:12px;margin-bottom:4px;}
-.rkey{color:var(--ink4);min-width:52px;flex-shrink:0;}.rval{color:var(--ink2);}
+.rkey{color:var(--ink4);min-width:52px;flex-shrink:0;}
+.rval{color:var(--ink2);}
 .atag{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:500;background:var(--red-lt);color:var(--red);}
-.google-btn{width:100%;padding:12px;background:var(--white);color:var(--ink);font-size:14px;font-weight:500;border:1px solid rgba(0,0,0,0.15);border-radius:var(--r);cursor:pointer;margin-bottom:12px;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
-.setup-card{background:var(--white);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
-.setup-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;}
-.setup-step:last-child{margin-bottom:0;}
-.snum{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.stext{font-size:12px;color:var(--ink2);line-height:1.7;}
-.stext strong{color:var(--ink);font-weight:700;}
-.stext code{background:var(--paper2);padding:1px 5px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--navy);}
 .empty-state{text-align:center;padding:48px 24px;color:var(--ink4);}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;transition:transform 0.3s;z-index:999;white-space:nowrap;max-width:92vw;text-align:center;}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -105,11 +103,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
 
 <div class="app-header">
   <div>
-    <div class="app-title">SEILTECHNO 상담록</div>
-    <div class="app-sub" id="header-sub">PHASE 3 · AI OCR + Sheets API</div>
+    <div class="app-title">SEIILTECHNO 상담록</div>
+    <div class="app-sub">전시회 부스 상담 관리</div>
   </div>
   <div class="header-right">
-    <span class="sync-badge sync-off" id="sync-badge">미연동</span>
+    <span class="sync-badge" id="sync-badge">미연동</span>
     <div class="rec-count" id="rec-count">0건</div>
   </div>
 </div>
@@ -121,7 +119,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
 </div>
 
 <div class="main-scroll">
-
   <!-- 입력 탭 -->
   <div class="tab-panel active" id="tab-input">
     <div class="scan-zone" id="scan-zone" onclick="document.getElementById('camera-input').click()">
@@ -132,13 +129,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
       <div class="scan-hint">탭하면 카메라가 열립니다</div>
       <img id="card-preview" src="" alt="">
     </div>
-    <input type="file" id="camera-input" accept="image/*" capture="environment" onchange="onImageSelected(this)">
-
+    <input type="file" id="camera-input" accept="image/*" onchange="onImageSelected(this)">
     <button class="ocr-btn" id="ocr-btn" disabled onclick="runOCR()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       AI로 명함 자동 분석
     </button>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-card">명함 정보</div>
       <div class="form-row"><span class="form-label req">회사명</span><input class="form-input" id="f-company" placeholder="자동 또는 직접 입력"></div>
@@ -149,7 +144,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
       <div class="form-row"><span class="form-label">이메일</span><input class="form-input" id="f-email" type="email" placeholder="자동 또는 직접 입력"></div>
       <div class="form-row"><span class="form-label">주소</span><input class="form-input" id="f-address" placeholder="자동 또는 직접 입력"></div>
     </div>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-consult">상담 정보</div>
       <div class="chip-group"><div class="chip-label req">관심 제품</div><div id="product-chips"></div></div>
@@ -169,13 +163,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
       </div>
       <textarea class="form-textarea" id="f-consult" placeholder="상담 내용 (음성 또는 직접 입력)"></textarea>
     </div>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-action">후속 조치</div>
       <div class="chip-group"><div class="chip-label req">후속 조치</div><div id="action-chips"></div></div>
       <div class="chip-group"><div class="chip-label req">상담 담당자</div><div id="consultant-chips"></div></div>
     </div>
-
     <button class="submit-btn" id="submit-btn" onclick="submitRecord()">저장 + Sheets 전송</button>
   </div>
 
@@ -190,68 +182,61 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
       <div class="form-section-hdr hdr-sheets">Google Sheets 연동</div>
       <div style="padding:14px;">
         <div id="auth-area">
-          <button class="google-btn" onclick="handleGoogleLogin()">
+          <button onclick="handleGoogleLogin()" style="width:100%;padding:12px;background:var(--white);color:var(--ink);font-size:14px;font-weight:500;border:1px solid rgba(0,0,0,0.15);border-radius:var(--r);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Noto Sans KR',sans-serif;">
             <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
             Google 계정으로 로그인
           </button>
-          <div style="font-size:11px;color:var(--ink4);line-height:1.6;">로그인하면 저장 시 Sheets에 자동 기록됩니다.</div>
+          <div style="font-size:11px;color:var(--ink4);margin-top:8px;">로그인하면 저장 시 Sheets에 자동 기록됩니다.</div>
         </div>
         <div id="auth-ok" style="display:none;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
             <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
             <span style="font-size:13px;font-weight:500;color:var(--green);">Google 계정 연결됨</span>
           </div>
-          <div style="font-size:11px;color:var(--ink4);" id="auth-user"></div>
-          <button onclick="handleLogout()" style="margin-top:10px;padding:6px 14px;border:1px solid rgba(0,0,0,0.12);border-radius:20px;background:none;font-size:12px;color:var(--ink3);cursor:pointer;">로그아웃</button>
+          <button onclick="handleLogout()" style="padding:6px 14px;border:1px solid rgba(0,0,0,0.12);border-radius:20px;background:none;font-size:12px;color:var(--ink3);cursor:pointer;">로그아웃</button>
         </div>
       </div>
-      <div class="form-row"><span class="form-label">스프레드시트 ID</span><input class="form-input" id="s-sheet-id" placeholder="URL에서 복사" style="font-size:11px;font-family:monospace;"></div>
-      <div class="form-row"><span class="form-label">시트명</span><input class="form-input" id="s-sheet-name" placeholder="예) ⑤ 폼 입력"></div>
+      <div class="form-row"><span class="form-label">시트 ID</span><input class="form-input" id="s-sheet-id" placeholder="URL에서 복사" style="font-size:11px;font-family:monospace;"></div>
+      <div class="form-row"><span class="form-label">시트명</span><input class="form-input" id="s-sheet-name" placeholder="예) 요약 대시보드"></div>
     </div>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-card">Anthropic API 키 (명함 OCR)</div>
       <div class="form-row" style="flex-direction:column;align-items:flex-start;padding:12px 14px;gap:6px;">
-        <input class="form-input" id="s-api-key" type="password" placeholder="sk-ant-..." style="width:100%;font-family:monospace;font-size:12px;">
-        <span style="font-size:10px;color:var(--ink4);">
-          <a href="https://console.anthropic.com" target="_blank" style="color:var(--navy);">console.anthropic.com</a>에서 발급 · 이 기기에만 저장
-        </span>
+        <input class="form-input" id="s-api-key" type="password" placeholder="sk-ant-api03-..." style="width:100%;font-family:monospace;font-size:12px;">
+        <a href="https://console.anthropic.com" target="_blank" style="font-size:10px;color:var(--navy);">console.anthropic.com에서 발급</a>
       </div>
     </div>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-consult">전시회 / 담당자</div>
-      <div class="form-row"><span class="form-label">전시회명</span><input class="form-input" id="s-exhibition" placeholder="예) 2025 ASPS"></div>
-      <div class="form-row"><span class="form-label">장소</span><input class="form-input" id="s-venue" placeholder="예) 수원컨벤션센터"></div>
-      <div class="form-row"><span class="form-label">상담자 1</span><input class="form-input" id="s-c1" placeholder="예) Choi"></div>
-      <div class="form-row"><span class="form-label">상담자 2</span><input class="form-input" id="s-c2" placeholder="예) Kim"></div>
+      <div class="form-row"><span class="form-label">전시회명</span><input class="form-input" id="s-exhibition" placeholder="예) SEIILTECHNO 2025"></div>
+      <div class="form-row"><span class="form-label">장소</span><input class="form-input" id="s-venue" placeholder="예) 코엑스"></div>
+      <div class="form-row"><span class="form-label">상담자 1</span><input class="form-input" id="s-c1" placeholder="예) 최영업"></div>
+      <div class="form-row"><span class="form-label">상담자 2</span><input class="form-input" id="s-c2" placeholder="예) 김개발"></div>
     </div>
-
     <div class="form-section">
       <div class="form-section-hdr hdr-action">전시 제품 (쉼표로 구분)</div>
       <div class="form-row">
         <textarea class="form-textarea" id="s-products" style="min-height:56px" placeholder="Mantis, Lynx EVO, Deep Vision, EVOCAM Halo, HAWL, 슈나이더, Makrolite, 기타"></textarea>
       </div>
     </div>
-
     <div class="form-section">
-      <div class="form-section-hdr" style="background:#f0fafa;color:#0a5a5a;">Google OAuth Client ID</div>
+      <div class="form-section-hdr" style="background:#f0eeff;color:#3a1a7a;">Google OAuth Client ID</div>
       <div class="form-row" style="flex-direction:column;align-items:flex-start;padding:12px 14px;gap:6px;">
-        <input class="form-input" id="s-client-id" placeholder="xxxxxx.apps.googleusercontent.com" style="width:100%;font-family:monospace;font-size:11px;">
-        <span style="font-size:10px;color:var(--ink4);">Google Cloud Console에서 발급 → 아래 가이드 참고</span>
+        <input class="form-input" id="s-client-id" placeholder="숫자.apps.googleusercontent.com" style="width:100%;font-family:monospace;font-size:11px;">
+        <span style="font-size:10px;color:var(--ink4);">Google Cloud → API 및 서비스 → 사용자 인증 정보 → ASPS 앱</span>
       </div>
     </div>
-
     <button class="submit-btn" style="background:var(--navy);" onclick="saveSettings()">설정 저장</button>
-
-    <div style="margin-top:20px;margin-bottom:10px;font-size:11px;font-weight:700;color:var(--ink4);font-family:'IBM Plex Mono',monospace;letter-spacing:0.08em;">GOOGLE CLOUD 설정 가이드</div>
-    <div class="setup-card">
-      <div class="setup-step"><div class="snum">1</div><div class="stext"><strong>console.cloud.google.com</strong> 접속<br>새 프로젝트 생성 → 이름: <code>asps-booth</code></div></div>
-      <div class="setup-step"><div class="snum">2</div><div class="stext">왼쪽 메뉴 → <strong>API 및 서비스 → 라이브러리</strong><br><code>Google Sheets API</code> 검색 → 사용 설정</div></div>
-      <div class="setup-step"><div class="snum">3</div><div class="stext"><strong>OAuth 동의 화면</strong> → 유형: <code>외부</code><br>앱 이름 입력 → 범위: <code>spreadsheets</code> 추가</div></div>
-      <div class="setup-step"><div class="snum">4</div><div class="stext"><strong>사용자 인증 정보 만들기</strong> → <code>OAuth 클라이언트 ID</code><br>유형: <code>웹 애플리케이션</code><br>승인된 JavaScript 원본에 이 파일의 도메인 추가<br>→ 생성된 Client ID 복사 → 위 칸 붙여넣기</div></div>
-      <div class="setup-step"><div class="snum">5</div><div class="stext">Sheets URL에서 ID 복사<br><code>spreadsheets/d/<strong>[여기가 ID]</strong>/edit</code><br>→ 스프레드시트 ID 칸 붙여넣기</div></div>
+    <div class="form-section" style="margin-top:12px;">
+      <div class="form-section-hdr hdr-sheets">설정 내보내기 / 가져오기</div>
+      <div style="padding:14px;">
+        <div style="font-size:11px;color:var(--ink4);margin-bottom:10px;line-height:1.6;">PC에서 복사 후 카카오톡으로 전송 → 스마트폰에서 붙여넣기하면 모든 설정이 한번에 동기화돼요.</div>
+        <button onclick="exportSettings()" style="width:100%;padding:11px;background:var(--teal);color:#fff;font-size:13px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;margin-bottom:8px;font-family:'Noto Sans KR',sans-serif;">설정 코드 복사 (PC에서 실행)</button>
+        <textarea id="import-box" placeholder="설정 코드를 여기에 붙여넣고 아래 버튼 클릭 (스마트폰에서 실행)" style="width:100%;min-height:56px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:8px;font-size:11px;font-family:monospace;resize:none;margin-bottom:8px;background:var(--paper);"></textarea>
+        <button onclick="importSettings()" style="width:100%;padding:11px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;font-family:'Noto Sans KR',sans-serif;">가져오기 (스마트폰에서 실행)</button>
+      </div>
     </div>
+    <button onclick="clearAll()" style="width:100%;padding:12px;background:none;border:1px solid var(--red);color:var(--red);border-radius:var(--r);font-size:13px;margin-top:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">전체 데이터 초기화</button>
   </div>
 </div>
 
@@ -263,335 +248,186 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--i
 <div class="toast" id="toast"></div>
 
 <script>
-let records=JSON.parse(localStorage.getItem('asps_r')||'[]');
-let settings=JSON.parse(localStorage.getItem('asps_s')||'{}');
-let selLevel='',selProducts=[],selAction='',selConsultant='';
-let isRecording=false,recognition=null,capturedB64=null;
-let tokenClient=null,accessToken=null,gapiReady=false;
-const PRODUCTS_DEFAULT='Mantis,Mantis pixo,Lynx EVO,Deep Vision,EVOCAM Halo,HAWL,슈나이더,Makrolite,기타';
-const ACTIONS=['데모 요청','자료 PDF 전송','자료 및 견적 전송','Sample Test 진행','즉시 연락 및 견적','담당자 대응 예정','연락 후 추적','없음'];
+var records=JSON.parse(localStorage.getItem('seil_r')||'[]');
+var settings=JSON.parse(localStorage.getItem('seil_s')||'{}');
+var selLevel='',selProducts=[],selAction='',selConsultant='';
+var isRecording=false,recognition=null,capturedB64=null,capturedMime='image/jpeg';
+var tokenClient=null,accessToken=null,gapiReady=false;
+var PRODUCTS_DEFAULT='Mantis,Mantis pixo,Lynx EVO,Deep Vision,EVOCAM Halo,HAWL,슈나이더,Makrolite,기타';
+var ACTIONS=['데모 요청','자료 PDF 전송','자료 및 견적 전송','Sample Test 진행','즉시 연락 및 견적','담당자 대응 예정','연락 후 추적','없음'];
 
 function init(){
-  loadSettings(); renderChips(); renderList(); updateCount();
-  // gapi 로드 대기
-  const waitGapi=setInterval(()=>{
-    if(typeof gapi!=='undefined'&&typeof google!=='undefined'){
-      clearInterval(waitGapi); initGapi();
-    }
+  loadSettings();renderChips();renderList();updateCount();
+  var wait=setInterval(function(){
+    if(typeof gapi!=='undefined'&&typeof google!=='undefined'){clearInterval(wait);initGapi();}
   },300);
 }
-
 function loadSettings(){
-  const m={apiKey:'s-api-key',clientId:'s-client-id',sheetId:'s-sheet-id',sheetName:'s-sheet-name',
-           exhibition:'s-exhibition',venue:'s-venue',c1:'s-c1',c2:'s-c2',products:'s-products'};
-  Object.entries(m).forEach(([k,id])=>{ if(settings[k]){ const el=document.getElementById(id); if(el) el.value=settings[k]; }});
+  var m={apiKey:'s-api-key',clientId:'s-client-id',sheetId:'s-sheet-id',sheetName:'s-sheet-name',exhibition:'s-exhibition',venue:'s-venue',c1:'s-c1',c2:'s-c2',products:'s-products'};
+  Object.keys(m).forEach(function(k){if(settings[k]){var el=document.getElementById(m[k]);if(el)el.value=settings[k];}});
 }
-
 function saveSettings(){
-  settings={
-    apiKey:document.getElementById('s-api-key').value.trim(),
-    clientId:document.getElementById('s-client-id').value.trim(),
-    sheetId:document.getElementById('s-sheet-id').value.trim(),
-    sheetName:document.getElementById('s-sheet-name').value.trim()||'⑤ 폼 입력',
-    exhibition:document.getElementById('s-exhibition').value.trim(),
-    venue:document.getElementById('s-venue').value.trim(),
-    c1:document.getElementById('s-c1').value.trim()||'Choi',
-    c2:document.getElementById('s-c2').value.trim()||'Kim',
-    products:document.getElementById('s-products').value.trim()||PRODUCTS_DEFAULT,
-  };
-  localStorage.setItem('asps_s',JSON.stringify(settings));
-  renderChips(); updateSyncBadge(); initGapi();
-  showToast('설정 저장 완료!');
+  settings={apiKey:document.getElementById('s-api-key').value.trim(),clientId:document.getElementById('s-client-id').value.trim(),sheetId:document.getElementById('s-sheet-id').value.trim(),sheetName:document.getElementById('s-sheet-name').value.trim()||'요약 대시보드',exhibition:document.getElementById('s-exhibition').value.trim(),venue:document.getElementById('s-venue').value.trim(),c1:document.getElementById('s-c1').value.trim()||'Choi',c2:document.getElementById('s-c2').value.trim()||'Kim',products:document.getElementById('s-products').value.trim()||PRODUCTS_DEFAULT};
+  localStorage.setItem('seil_s',JSON.stringify(settings));renderChips();updateSyncBadge();initGapi();showToast('설정 저장 완료!');
 }
-
+function exportSettings(){
+  var code=btoa(encodeURIComponent(JSON.stringify(settings)));
+  if(navigator.clipboard){navigator.clipboard.writeText(code).then(function(){showToast('복사 완료! 카카오톡으로 전송하세요');}).catch(function(){document.getElementById('import-box').value=code;showToast('아래 텍스트를 직접 복사하세요');});}
+  else{document.getElementById('import-box').value=code;showToast('아래 텍스트를 직접 복사하세요');}
+}
+function importSettings(){
+  var code=document.getElementById('import-box').value.trim();
+  if(!code){showToast('설정 코드를 붙여넣어 주세요');return;}
+  try{var imported=JSON.parse(decodeURIComponent(atob(code)));settings=imported;localStorage.setItem('seil_s',JSON.stringify(settings));loadSettings();renderChips();updateSyncBadge();document.getElementById('import-box').value='';showToast('설정 가져오기 완료! Google 로그인만 하세요');}
+  catch(e){showToast('코드가 올바르지 않아요. 다시 복사해주세요');}
+}
 function initGapi(){
-  if(!settings.clientId||typeof gapi==='undefined'||typeof google==='undefined') return;
-  gapi.load('client',async()=>{
-    try{
-      await gapi.client.init({discoveryDocs:['https://sheets.googleapis.com/$discovery/rest?version=v4']});
+  if(!settings.clientId||typeof gapi==='undefined'||typeof google==='undefined')return;
+  gapi.load('client',function(){
+    gapi.client.init({discoveryDocs:['https://sheets.googleapis.com/$discovery/rest?version=v4']}).then(function(){
       gapiReady=true;
-      tokenClient=google.accounts.oauth2.initTokenClient({
-        client_id:settings.clientId,
-        scope:'https://www.googleapis.com/auth/spreadsheets',
-        callback:(resp)=>{
-          if(resp.error){showToast('Google 로그인 실패');return;}
-          accessToken=resp.access_token;
-          gapi.client.setToken({access_token:accessToken});
-          showAuthOk(); updateSyncBadge();
-        }
-      });
+      tokenClient=google.accounts.oauth2.initTokenClient({client_id:settings.clientId,scope:'https://www.googleapis.com/auth/spreadsheets',callback:function(resp){
+        if(resp.error){showToast('Google 로그인 실패');return;}
+        accessToken=resp.access_token;gapi.client.setToken({access_token:accessToken});
+        document.getElementById('auth-area').style.display='none';document.getElementById('auth-ok').style.display='';
+        updateSyncBadge();showToast('Google 연결 완료!');
+      }});
       updateSyncBadge();
-    }catch(e){console.warn('gapi init:',e);}
+    }).catch(function(e){console.warn('gapi:',e);});
   });
 }
-
 function handleGoogleLogin(){
   if(!settings.clientId){showToast('설정에서 Client ID를 먼저 입력해주세요');return;}
   if(!gapiReady){showToast('잠시 후 다시 시도해주세요');return;}
   tokenClient.requestAccessToken({prompt:'consent'});
 }
 function handleLogout(){
-  if(accessToken) google.accounts.oauth2.revoke(accessToken);
-  accessToken=null; gapi.client.setToken(null);
-  document.getElementById('auth-area').style.display='';
-  document.getElementById('auth-ok').style.display='none';
-  updateSyncBadge(); showToast('로그아웃됐어요');
-}
-function showAuthOk(){
-  document.getElementById('auth-area').style.display='none';
-  document.getElementById('auth-ok').style.display='';
-  document.getElementById('auth-user').textContent='연결됨 ✓';
+  if(accessToken)google.accounts.oauth2.revoke(accessToken);
+  accessToken=null;gapi.client.setToken(null);
+  document.getElementById('auth-area').style.display='';document.getElementById('auth-ok').style.display='none';
+  updateSyncBadge();showToast('로그아웃됐어요');
 }
 function updateSyncBadge(){
-  const b=document.getElementById('sync-badge');
-  if(!settings.sheetId){b.className='sync-badge sync-off';return;}
-  b.className='sync-badge '+(accessToken?'sync-ok':'sync-err');
+  var b=document.getElementById('sync-badge');
+  if(!settings.sheetId){b.className='sync-badge';return;}
+  b.className='sync-badge show '+(accessToken?'sync-ok':'sync-err');
   b.textContent=accessToken?'Sheets 연동':'로그인 필요';
 }
-
 function onImageSelected(input){
-  const file=input.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const url=e.target.result; capturedB64=url.split(',')[1];
-    const p=document.getElementById('card-preview'); p.src=url; p.style.display='block';
+  var file=input.files[0];if(!file)return;
+  capturedMime=file.type||'image/jpeg';
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var url=e.target.result;capturedB64=url.split(',')[1];
+    var p=document.getElementById('card-preview');p.src=url;p.style.display='block';
     document.getElementById('scan-zone').classList.add('has-image');
     document.getElementById('scan-title').textContent='명함 사진 등록됨 ✓';
-    const btn=document.getElementById('ocr-btn'); btn.disabled=false;
-    btn.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>AI로 명함 자동 분석하기`;
+    var btn=document.getElementById('ocr-btn');btn.disabled=false;
+    btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>AI로 명함 자동 분석하기';
   };
   reader.readAsDataURL(file);
 }
-
 async function runOCR(){
   if(!settings.apiKey){showToast('설정 탭에서 API 키를 입력해주세요');return;}
   if(!capturedB64){showToast('명함 사진을 먼저 촬영해주세요');return;}
   showOverlay('명함 분석 중...','Claude AI가 텍스트를 추출하고 있어요');
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':settings.apiKey,'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':settings.apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:600,
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
         messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:'image/jpeg',data:capturedB64}},
-          {type:'text',text:`명함에서 정보를 추출해 JSON만 응답하세요. 없으면 빈 문자열.
-{"company":"회사명","name":"이름","title":"직책","dept":"부서","mobile":"핸드폰(숫자와-만)","email":"이메일","address":"주소"}
-JSON 외 텍스트 없이 JSON만.`}
+          {type:'image',source:{type:'base64',media_type:capturedMime,data:capturedB64}},
+          {type:'text',text:'이 명함 이미지에서 정보를 추출해서 JSON으로만 응답하세요. 없는 항목은 빈 문자열로. {"company":"회사명","name":"담당자이름","title":"직책","dept":"부서","mobile":"핸드폰번호","email":"이메일","address":"주소"} JSON만 응답하세요.'}
         ]}]
       })
     });
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
-    const match=text.match(/\{[\s\S]*\}/);
+    var data=await res.json();
+    if(data.error){showToast('API 오류: '+data.error.message);return;}
+    var text=(data.content&&data.content[0]&&data.content[0].text)||'';
+    var match=text.match(/\{[\s\S]*?\}/);
     if(match){
-      const info=JSON.parse(match[0]);
-      setField('f-company',info.company); setField('f-name',info.name);
-      setField('f-title',info.title); setField('f-dept',info.dept);
-      setField('f-mobile',info.mobile); setField('f-email',info.email);
-      setField('f-address',info.address);
+      var info=JSON.parse(match[0]);
+      setField('f-company',info.company);setField('f-name',info.name);setField('f-title',info.title);
+      setField('f-dept',info.dept);setField('f-mobile',info.mobile);setField('f-email',info.email);setField('f-address',info.address);
       showToast('명함 정보 자동 입력 완료!');
-    } else showToast('인식 실패 — 직접 입력해주세요');
-  }catch(e){showToast('오류 발생 — API 키를 확인해주세요');}
+    } else {
+      showToast('인식 실패 — 직접 입력해주세요');
+      console.log('응답:', text);
+    }
+  }catch(e){showToast('오류: '+e.message);console.error(e);}
   finally{hideOverlay();}
 }
-
-function setField(id,val){if(!val)return;const el=document.getElementById(id);el.value=val;el.classList.add('ai-filled');}
-
+function setField(id,val){if(!val)return;var el=document.getElementById(id);el.value=val;el.classList.add('ai-filled');}
 function toggleVoice(){
   if(!('webkitSpeechRecognition'in window)&&!('SpeechRecognition'in window)){showToast('음성 입력 미지원 브라우저');return;}
-  if(isRecording){
-    recognition&&recognition.stop();isRecording=false;
-    document.getElementById('voice-btn').classList.remove('recording');
-    document.getElementById('voice-btn').innerHTML=micSvg()+'음성 입력';
-    document.getElementById('voice-status').textContent='마이크로 상담 내용 입력';
-    return;
-  }
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  recognition=new SR(); recognition.lang='ko-KR'; recognition.continuous=true; recognition.interimResults=true;
-  recognition.onresult=e=>{
-    let f='';for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)f+=e.results[i][0].transcript;
-    if(f){const ta=document.getElementById('f-consult');ta.value=(ta.value?ta.value+' ':'')+f;}
-  };
-  recognition.onerror=()=>{isRecording=false;document.getElementById('voice-btn').classList.remove('recording');};
+  if(isRecording){if(recognition)recognition.stop();isRecording=false;document.getElementById('voice-btn').classList.remove('recording');document.getElementById('voice-btn').innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>음성 입력';document.getElementById('voice-status').textContent='마이크로 상담 내용 입력';return;}
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new SR();recognition.lang='ko-KR';recognition.continuous=true;recognition.interimResults=true;
+  recognition.onresult=function(e){var f='';for(var i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)f+=e.results[i][0].transcript;if(f){var ta=document.getElementById('f-consult');ta.value=(ta.value?ta.value+' ':'')+f;}};
+  recognition.onerror=function(){isRecording=false;document.getElementById('voice-btn').classList.remove('recording');};
   recognition.start();isRecording=true;
   document.getElementById('voice-btn').classList.add('recording');
-  document.getElementById('voice-btn').innerHTML=stopSvg()+'녹음 중지';
+  document.getElementById('voice-btn').innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>녹음 중지';
   document.getElementById('voice-status').textContent='말씀하세요... (버튼 눌러 종료)';
 }
-function micSvg(){return`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`;}
-function stopSvg(){return`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>`;}
-
-function selectLevel(lv,cls){
-  selLevel=lv;['aplus','a','b','c'].forEach(x=>document.getElementById('lv-'+x).className='chip');
-  document.getElementById('lv-'+cls).className='chip sel-'+cls;
-}
-function toggleProduct(p){if(selProducts.includes(p))selProducts=selProducts.filter(x=>x!==p);else selProducts.push(p);renderChips();}
+function selectLevel(lv,cls){selLevel=lv;['aplus','a','b','c'].forEach(function(x){document.getElementById('lv-'+x).className='chip';});document.getElementById('lv-'+cls).className='chip sel-'+cls;}
+function toggleProduct(p){if(selProducts.indexOf(p)>=0)selProducts=selProducts.filter(function(x){return x!==p;});else selProducts.push(p);renderChips();}
 function selectAction(a){selAction=a;renderChips();}
 function selectConsultant(c){selConsultant=c;renderChips();}
-
 function renderChips(){
-  const prods=(settings.products||PRODUCTS_DEFAULT).split(',').map(p=>p.trim()).filter(Boolean);
-  const c1=settings.c1||'Choi',c2=settings.c2||'Kim';
-  document.getElementById('product-chips').innerHTML=prods.map(p=>`<button class="chip ${selProducts.includes(p)?'sel-prod':''}" onclick="toggleProduct('${p}')">${p}</button>`).join('');
-  document.getElementById('action-chips').innerHTML=ACTIONS.map(a=>`<button class="chip ${selAction===a?'sel-act':''}" onclick="selectAction('${a}')">${a}</button>`).join('');
-  document.getElementById('consultant-chips').innerHTML=[c1,c2].filter(Boolean).map(c=>`<button class="chip ${selConsultant===c?'sel-cons':''}" onclick="selectConsultant('${c}')">${c}</button>`).join('');
+  var prods=(settings.products||PRODUCTS_DEFAULT).split(',').map(function(p){return p.trim();}).filter(Boolean);
+  var c1=settings.c1||'Choi',c2=settings.c2||'Kim';
+  document.getElementById('product-chips').innerHTML=prods.map(function(p){return '<button class="chip '+(selProducts.indexOf(p)>=0?'sel-prod':'')+'" onclick="toggleProduct(\''+p+'\')">'+p+'</button>';}).join('');
+  document.getElementById('action-chips').innerHTML=ACTIONS.map(function(a){return '<button class="chip '+(selAction===a?'sel-act':'')+'" onclick="selectAction(\''+a+'\')">'+a+'</button>';}).join('');
+  document.getElementById('consultant-chips').innerHTML=[c1,c2].filter(Boolean).map(function(c){return '<button class="chip '+(selConsultant===c?'sel-cons':'')+'" onclick="selectConsultant(\''+c+'\')">'+c+'</button>';}).join('');
 }
-
 async function submitRecord(){
-  const company=document.getElementById('f-company').value.trim();
-  const name=document.getElementById('f-name').value.trim();
-  const mobile=document.getElementById('f-mobile').value.trim();
-  const consult=document.getElementById('f-consult').value.trim();
-  if(!company)return showToast('회사명을 입력해주세요');
-  if(!name)   return showToast('담당자 이름을 입력해주세요');
-  if(!mobile) return showToast('핸드폰 번호를 입력해주세요');
-  if(!selLevel)return showToast('Level을 선택해주세요');
-  if(!consult) return showToast('상담 내용을 입력해주세요');
-  if(!selAction)return showToast('후속 조치를 선택해주세요');
-  if(!selConsultant)return showToast('상담 담당자를 선택해주세요');
-
-  const today=new Date().toISOString().slice(0,10);
-  const rec={
-    no:records.length+1,date:today,company,name,
-    title:document.getElementById('f-title').value.trim(),
-    dept:document.getElementById('f-dept').value.trim(),
-    mobile,email:document.getElementById('f-email').value.trim(),
-    address:document.getElementById('f-address').value.trim(),
-    products:selProducts.join(', '),level:selLevel,consult,action:selAction,
-    consultant:selConsultant,synced:false,
-  };
-
-  const btn=document.getElementById('submit-btn');
-  btn.textContent='저장 중...'; btn.disabled=true;
-
-  let synced=false;
+  var company=document.getElementById('f-company').value.trim(),name=document.getElementById('f-name').value.trim(),mobile=document.getElementById('f-mobile').value.trim(),consult=document.getElementById('f-consult').value.trim();
+  if(!company)return showToast('회사명을 입력해주세요');if(!name)return showToast('담당자 이름을 입력해주세요');if(!mobile)return showToast('핸드폰 번호를 입력해주세요');if(!selLevel)return showToast('Level을 선택해주세요');if(!consult)return showToast('상담 내용을 입력해주세요');if(!selAction)return showToast('후속 조치를 선택해주세요');if(!selConsultant)return showToast('상담 담당자를 선택해주세요');
+  var today=new Date().toISOString().slice(0,10);
+  var rec={no:records.length+1,date:today,company,name,title:document.getElementById('f-title').value.trim(),dept:document.getElementById('f-dept').value.trim(),mobile,email:document.getElementById('f-email').value.trim(),address:document.getElementById('f-address').value.trim(),products:selProducts.join(', '),level:selLevel,consult,action:selAction,consultant:selConsultant,synced:false};
+  var btn=document.getElementById('submit-btn');btn.textContent='저장 중...';btn.disabled=true;
+  var synced=false;
   if(accessToken&&settings.sheetId){
-    showOverlay('Sheets에 기록 중...','데이터를 전송하고 있어요');
+    showOverlay('Sheets에 기록 중...','');
     try{
-      const row=[rec.no,rec.company,rec.dept,rec.name,rec.title,rec.mobile,rec.email,rec.products,rec.level,'',rec.consult,rec.action,rec.consultant,rec.date];
-      await gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId:settings.sheetId,
-        range:`${settings.sheetName}!A:N`,
-        valueInputOption:'USER_ENTERED',
-        resource:{values:[row]},
-      });
-      synced=true; rec.synced=true;
-    }catch(e){console.error(e);showToast('Sheets 전송 실패 — 로컬에만 저장됐어요');}
+      var row=[rec.no,rec.company,rec.dept,rec.name,rec.title,rec.mobile,rec.email,rec.products,rec.level,'',rec.consult,rec.action,rec.consultant,rec.date];
+      await gapi.client.sheets.spreadsheets.values.append({spreadsheetId:settings.sheetId,range:settings.sheetName+'!A:N',valueInputOption:'USER_ENTERED',resource:{values:[row]}});
+      synced=true;rec.synced=true;
+    }catch(e){console.error(e);showToast('Sheets 전송 실패');}
     finally{hideOverlay();}
   }
-
-  records.push(rec);
-  localStorage.setItem('asps_r',JSON.stringify(records));
-  updateCount(); resetForm();
-  btn.textContent='저장 + Sheets 전송'; btn.disabled=false;
-  if(synced) showToast(`${company} 저장 완료! Sheets 전송 ✓`);
-  else if(!settings.sheetId) showToast(`${company} 저장됨 (Sheets 미설정)`);
-  else showToast(`${company} 로컬 저장됨 (Sheets 전송 실패)`);
+  records.push(rec);localStorage.setItem('seil_r',JSON.stringify(records));updateCount();resetForm();
+  btn.textContent='저장 + Sheets 전송';btn.disabled=false;
+  showToast(company+(synced?' 저장 완료! Sheets ✓':' 로컬 저장됨'));
 }
-
 function resetForm(){
-  ['f-company','f-name','f-title','f-dept','f-mobile','f-email','f-address','f-consult'].forEach(id=>{
-    const el=document.getElementById(id); el.value=''; el.classList.remove('ai-filled');
-  });
-  selLevel='';selProducts=[];selAction='';selConsultant='';
-  capturedB64=null;
-  document.getElementById('card-preview').style.display='none';
-  document.getElementById('scan-zone').classList.remove('has-image');
-  document.getElementById('scan-title').textContent='명함 촬영 / 갤러리 선택';
-  const btn=document.getElementById('ocr-btn'); btn.disabled=true;
-  btn.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>AI로 명함 자동 분석`;
+  ['f-company','f-name','f-title','f-dept','f-mobile','f-email','f-address','f-consult'].forEach(function(id){var el=document.getElementById(id);el.value='';el.classList.remove('ai-filled');});
+  selLevel='';selProducts=[];selAction='';selConsultant='';capturedB64=null;capturedMime='image/jpeg';
+  document.getElementById('card-preview').style.display='none';document.getElementById('scan-zone').classList.remove('has-image');document.getElementById('scan-title').textContent='명함 촬영 / 갤러리 선택';
+  var btn=document.getElementById('ocr-btn');btn.disabled=true;btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>AI로 명함 자동 분석';
   renderChips();
 }
-
 function renderList(){
-  const list=document.getElementById('record-list');
-  if(!records.length){list.innerHTML=`<div class="empty-state"><div style="font-size:40px;opacity:0.3;margin-bottom:12px;">📋</div><div style="font-size:13px;line-height:1.7;">아직 입력된 상담이 없어요<br>입력 탭에서 시작해보세요</div></div>`;return;}
-  const bc={'A+':'lvaplus','A':'lva','B':'lvb','C':'lvc'};
-  list.innerHTML=[...records].reverse().map(r=>`
-    <div class="record-card">
-      <div class="record-hdr">
-        <div class="record-num">${r.no}</div>
-        <div class="record-company">${r.company}</div>
-        <div class="lvbadge ${bc[r.level]||'lvc'}">${r.level}</div>
-        <div class="sdot ${r.synced?'dot-ok':'dot-pending'}" title="${r.synced?'Sheets 전송 완료':'미전송'}"></div>
-      </div>
-      <div class="record-body">
-        <div class="rrow"><span class="rkey">담당자</span><span class="rval">${r.name}${r.title?' ('+r.title+')':''}</span></div>
-        <div class="rrow"><span class="rkey">핸드폰</span><span class="rval">${r.mobile}</span></div>
-        ${r.products?`<div class="rrow"><span class="rkey">관심제품</span><span class="rval">${r.products}</span></div>`:''}
-        <div class="rrow"><span class="rkey">상담내용</span><span class="rval">${r.consult}</span></div>
-        <span class="atag">${r.action}</span>
-        <div class="rrow" style="margin-top:6px;"><span class="rkey">담당자</span><span class="rval" style="color:var(--ink4);font-size:11px;">${r.consultant} · ${r.date}${r.synced?' · Sheets ✓':''}</span></div>
-      </div>
-    </div>`).join('');
+  var list=document.getElementById('record-list');
+  if(!records.length){list.innerHTML='<div class="empty-state"><div style="font-size:40px;opacity:0.3;margin-bottom:12px;">📋</div><div style="font-size:13px;">아직 입력된 상담이 없어요</div></div>';return;}
+  var bc={'A+':'lvaplus','A':'lva','B':'lvb','C':'lvc'};
+  list.innerHTML=[].concat(records).reverse().map(function(r){return '<div class="record-card"><div class="record-hdr"><div class="record-num">'+r.no+'</div><div class="record-company">'+r.company+'</div><div class="lvbadge '+(bc[r.level]||'lvc')+'">'+r.level+'</div><div class="sdot '+(r.synced?'dot-ok':'dot-pending')+'"></div></div><div class="record-body"><div class="rrow"><span class="rkey">담당자</span><span class="rval">'+r.name+(r.title?' ('+r.title+')':'')+'</span></div><div class="rrow"><span class="rkey">핸드폰</span><span class="rval">'+r.mobile+'</span></div>'+(r.products?'<div class="rrow"><span class="rkey">관심제품</span><span class="rval">'+r.products+'</span></div>':'')+'<div class="rrow"><span class="rkey">상담내용</span><span class="rval">'+r.consult+'</span></div><span class="atag">'+r.action+'</span><div class="rrow" style="margin-top:6px;"><span class="rkey" style="color:var(--ink4);font-size:11px;">'+r.consultant+' · '+r.date+(r.synced?' · Sheets ✓':'')+'</span></div></div></div>';}).join('');
 }
-
 function updateCount(){document.getElementById('rec-count').textContent=records.length+'건';}
-
-function switchTab(name,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(name==='list')renderList();
-}
-
-function showOverlay(msg,sub){
-  document.getElementById('ai-msg').textContent=msg||'처리 중...';
-  document.getElementById('ai-sub').textContent=sub||'';
-  document.getElementById('ai-overlay').classList.add('show');
-}
+function switchTab(name,btn){document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+name).classList.add('active');if(btn)btn.classList.add('active');if(name==='list')renderList();}
+function showOverlay(msg,sub){document.getElementById('ai-msg').textContent=msg||'처리 중...';document.getElementById('ai-sub').textContent=sub||'';document.getElementById('ai-overlay').classList.add('show');}
 function hideOverlay(){document.getElementById('ai-overlay').classList.remove('show');}
-function showToast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
-
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+function clearAll(){if(confirm('모든 상담 데이터를 삭제할까요?')){records=[];localStorage.removeItem('seil_r');updateCount();renderList();showToast('초기화됐습니다');}}
 init();
-  function exportSettings(){
-  const code = btoa(encodeURIComponent(JSON.stringify(settings)));
-  navigator.clipboard.writeText(code).then(()=>{
-    showToast('설정 코드 복사 완료! 카카오톡으로 전송하세요');
-  }).catch(()=>{
-    const box = document.getElementById('import-box');
-    box.value = code;
-    box.select();
-    showToast('아래 텍스트박스에서 직접 복사해주세요');
-  });
-}
-function importSettings(){
-  const code = document.getElementById('import-box').value.trim();
-  if(!code){ showToast('설정 코드를 붙여넣어 주세요'); return; }
-  try{
-    const imported = JSON.parse(decodeURIComponent(atob(code)));
-    settings = imported;
-    localStorage.setItem('asps_s', JSON.stringify(settings));
-    loadSettings();
-    renderChips();
-    updateSyncBadge();
-    document.getElementById('import-box').value = '';
-    showToast('설정 가져오기 완료! Google 로그인만 다시 해주세요');
-  }catch(e){
-    showToast('코드가 올바르지 않아요. 다시 복사해주세요');
-  }
-}
 </script>
-  <div class="form-section" style="margin-top:12px;">
-  <div class="form-section-hdr hdr-sheets">설정 내보내기 / 가져오기</div>
-  <div style="padding:14px;">
-    <div style="font-size:11px;color:var(--ink4);margin-bottom:8px;">
-      PC에서 복사 → 스마트폰에서 붙여넣기하면 모든 설정이 한번에 동기화돼요
-    </div>
-    <button onclick="exportSettings()" style="width:100%;padding:10px;background:var(--teal);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:700;margin-bottom:8px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">
-      설정 코드 복사 (PC에서 실행)
-    </button>
-    <textarea id="import-box" placeholder="설정 코드를 여기에 붙여넣고 아래 버튼을 누르세요 (스마트폰에서 실행)" style="width:100%;min-height:60px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:8px;font-size:11px;font-family:monospace;resize:none;margin-bottom:8px;"></textarea>
-    <button onclick="importSettings()" style="width:100%;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">
-      가져오기 (스마트폰에서 실행)
-    </button>
-  </div>
-</div>
 </body>
 </html>
