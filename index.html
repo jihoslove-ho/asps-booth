@@ -550,6 +550,48 @@ function showToast(msg){
 }
 
 init();
+  function exportSettings(){
+  const code = btoa(encodeURIComponent(JSON.stringify(settings)));
+  navigator.clipboard.writeText(code).then(()=>{
+    showToast('설정 코드 복사 완료! 카카오톡으로 전송하세요');
+  }).catch(()=>{
+    const box = document.getElementById('import-box');
+    box.value = code;
+    box.select();
+    showToast('아래 텍스트박스에서 직접 복사해주세요');
+  });
+}
+function importSettings(){
+  const code = document.getElementById('import-box').value.trim();
+  if(!code){ showToast('설정 코드를 붙여넣어 주세요'); return; }
+  try{
+    const imported = JSON.parse(decodeURIComponent(atob(code)));
+    settings = imported;
+    localStorage.setItem('asps_s', JSON.stringify(settings));
+    loadSettings();
+    renderChips();
+    updateSyncBadge();
+    document.getElementById('import-box').value = '';
+    showToast('설정 가져오기 완료! Google 로그인만 다시 해주세요');
+  }catch(e){
+    showToast('코드가 올바르지 않아요. 다시 복사해주세요');
+  }
+}
 </script>
+  <div class="form-section" style="margin-top:12px;">
+  <div class="form-section-hdr hdr-sheets">설정 내보내기 / 가져오기</div>
+  <div style="padding:14px;">
+    <div style="font-size:11px;color:var(--ink4);margin-bottom:8px;">
+      PC에서 복사 → 스마트폰에서 붙여넣기하면 모든 설정이 한번에 동기화돼요
+    </div>
+    <button onclick="exportSettings()" style="width:100%;padding:10px;background:var(--teal);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:700;margin-bottom:8px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">
+      설정 코드 복사 (PC에서 실행)
+    </button>
+    <textarea id="import-box" placeholder="설정 코드를 여기에 붙여넣고 아래 버튼을 누르세요 (스마트폰에서 실행)" style="width:100%;min-height:60px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:8px;font-size:11px;font-family:monospace;resize:none;margin-bottom:8px;"></textarea>
+    <button onclick="importSettings()" style="width:100%;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">
+      가져오기 (스마트폰에서 실행)
+    </button>
+  </div>
+</div>
 </body>
 </html>
