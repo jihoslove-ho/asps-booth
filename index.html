@@ -504,6 +504,7 @@ function importSettings() {
 // ── Google API ───────────────────────────────────────────────
 function initGapi() {
   if (!settings.clientId || typeof gapi==='undefined' || typeof google==='undefined') return;
+  gapiReady = false;
   gapi.load('client', function(){
     gapi.client.init({discoveryDocs:['https://sheets.googleapis.com/$discovery/rest?version=v4']}).then(function(){
       gapiReady = true;
@@ -511,7 +512,7 @@ function initGapi() {
         client_id: settings.clientId,
         scope: 'https://www.googleapis.com/auth/spreadsheets',
         callback: function(resp){
-          if (resp.error) { showToast('Google 로그인 실패'); return; }
+          if (resp.error) { showToast('Google 로그인 실패: '+resp.error); return; }
           accessToken = resp.access_token; gapi.client.setToken({access_token:accessToken});
           document.getElementById('auth-area').style.display='none';
           document.getElementById('auth-ok').style.display='';
@@ -519,12 +520,38 @@ function initGapi() {
         }
       });
       updateSyncBadge();
-    }).catch(function(e){ console.warn('gapi:',e); });
+      console.log('gapi 초기화 완료');
+    }).catch(function(e){
+      console.warn('gapi 초기화 실패:', e);
+      // 3초 후 재시도
+      setTimeout(initGapi, 3000);
+    });
   });
 }
 function handleGoogleLogin() {
   if (!settings.clientId) { showToast('설정에서 Client ID를 먼저 입력해주세요'); return; }
-  if (!gapiReady) { showToast('잠시 후 다시 시도해주세요'); return; }
+  if (!gapiReady) {
+    // gapi 아직 로딩 중 → 최대 8초 대기 후 재시도
+    showToast('Google 연결 준비 중... 잠시 기다려주세요');
+    var tries = 0;
+    var waitInterval = setInterval(function(){
+      tries++;
+      if (gapiReady) {
+        clearInterval(waitInterval);
+        setTimeout(function(){ tokenClient.requestAccessToken({prompt:'consent'}); }, 300);
+      } else if (tries > 16) {
+        clearInterval(waitInterval);
+        // gapi 강제 재초기화
+        showToast('다시 시도합니다...');
+        initGapi();
+        setTimeout(function(){
+          if (gapiReady) tokenClient.requestAccessToken({prompt:'consent'});
+          else showToast('네트워크 확인 후 다시 시도해주세요');
+        }, 3000);
+      }
+    }, 500);
+    return;
+  }
   tokenClient.requestAccessToken({prompt:'consent'});
 }
 function handleLogout() {
@@ -719,9 +746,18 @@ function init() {
   loadSettings(); renderChips(); renderList(); updateCount(); updateHeader();
   // 전시회 미설정이면 초기 설정 화면 표시
   if (!exhibit.name) showSetup();
-  // gapi 로드 대기
+  // gapi 로드 대기 (최대 15초)
+  var waitCount = 0;
   var wait = setInterval(function(){
-    if (typeof gapi!=='undefined' && typeof google!=='undefined') { clearInterval(wait); initGapi(); }
+    waitCount++;
+    if (typeof gapi!=='undefined' && typeof google!=='undefined') {
+      clearInterval(wait);
+      // 추가 500ms 대기 후 초기화 (라이브러리 완전 로딩 보장)
+      setTimeout(initGapi, 500);
+    } else if (waitCount > 50) {
+      clearInterval(wait);
+      console.warn('gapi 로딩 타임아웃');
+    }
   }, 300);
 }
 init();
